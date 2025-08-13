@@ -15,11 +15,11 @@ const Home = () => {
     <>
       <Box>
         <Grid container spacing={2}>
-          <Grid size={{ xs: 6, md: 4 }}>
+          <Grid size={{ xs: 12, sm: 6, md: 4 }}>
             <Card
               sx={{
                 padding: '0 20px',
-                minHeight: '140px',
+                minHeight: {sm:'140px', xs: '120px'},
                 display: 'flex',
                 color: 'white',
                 flexDirection: 'column',
@@ -28,8 +28,8 @@ const Home = () => {
                   'linear-gradient(158deg, rgba(40, 34, 70, 1) 0%, rgba(30, 47, 141, 1) 100%);',
               }}
             >
-              <CreditCardIcon sx={{ mb: 2.5 }} fontSize="medium" />
-              <Typography gutterBottom variant="h5" component="div">
+              <CreditCardIcon sx={{ mb: {sm:2.5, xs: 1} }} fontSize="medium" />
+              <Typography sx={{ mb: {xs: '2.6px', sm:'8px'}}} variant="h5" component="div">
                 <CountUp
                   start={0}
                   end={500}
@@ -44,21 +44,21 @@ const Home = () => {
               </Typography>
             </Card>
           </Grid>
-          <Grid size={{ xs: 6, md: 4 }}>
+          <Grid size={{ xs: 12, sm: 6, md: 4 }}>
             <Card
               sx={{
                 background:
                   'linear-gradient(158deg, rgba(53, 138, 148, 1) 0%, rgba(91, 180, 96, 1) 100%);',
                 color: 'white',
                 padding: '0 20px',
-                minHeight: '140px',
+               minHeight: {sm:'140px', xs: '120px'},
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'center',
               }}
             >
-              <ShoppingBagIcon sx={{ mb: 2.5 }} fontSize="medium" />
-              <Typography gutterBottom variant="h5" component="div">
+              <ShoppingBagIcon sx={{ mb: {sm:2.5, xs: 1} }} fontSize="medium" />
+              <Typography sx={{ mb: {xs: '2.6px', sm:'8px'}}} variant="h5" component="div">
                 <CountUp
                   start={0}
                   end={900}
@@ -87,7 +87,7 @@ const Home = () => {
                 }}
               >
                 <Stack
-                  spacing={3.5}
+                  spacing={{sm:3.5, xs: 1.9}}
                   direction="row"
                   sx={{
                     display: 'flex',
@@ -95,7 +95,7 @@ const Home = () => {
                   }}
                 >
                   <StorefrontIcon sx={{ mb: 2.5 }} fontSize="medium" />
-                  <Stack>
+                  <Stack >
                     <Typography variant="subtitle1" component="div">
                       <CountUp
                         start={0}
@@ -123,7 +123,7 @@ const Home = () => {
                 }}
               >
                 <Stack
-                  spacing={3.5}
+                  spacing={{sm:3.5, xs: 1.9}}
                   direction="row"
                   sx={{
                     display: 'flex',
@@ -156,7 +156,10 @@ const Home = () => {
           <Grid size={{ xs: 12, md: 8 }}>
             <Card
               sx={{
-                minHeight: '61vh',
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'center',
+                minHeight: '100%',
                 bgcolor: `${isDark ? '#2c2c3e' : ''}`,
                 color: `${isDark ? '#fff' : ''}`,
               }}
@@ -168,12 +171,12 @@ const Home = () => {
           <Grid size={{ xs: 12, md: 4 }}>
             <Card
               sx={{
-                minHeight: '61vh',
+                minHeight: {sm:'61vh', xs: '50vh'},
                 bgcolor: `${isDark ? '#2c2c3e' : ''}`,
                 color: `${isDark ? '#fff' : ''}`,
               }}
             >
-              <Box sx={{ padding: '30px 20px' }}>
+              <Box sx={{ padding: {sm:'30px 20px', xs: '20px 12.5px'} }}>
                 <Typography
                   variant="h6"
                   sx={{

@@ -212,7 +212,7 @@ export default function SideNav() {
           minHeight="100vh"
           sx={{
             flexGrow: 1,
-            p: 3,
+            p: {sm:3, xs: 2},
 
             background: `${
               isDark

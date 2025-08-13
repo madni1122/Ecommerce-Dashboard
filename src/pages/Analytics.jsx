@@ -26,9 +26,9 @@ const Analytics = () => {
     <>
       <Box>
         <Grid container spacing={2}>
-          <Grid container spacing={2} size={5}>
+          <Grid container spacing={2} size={{sm:5, xs:12}}>
             {visitors.map(({ id, visitors }, idx) => (
-              <Grid size={6} key={idx}>
+              <Grid size={{xs: 6, sm: 6}} key={idx}>
                 <Card
                   sx={{
                     padding: '0 20px',
@@ -67,7 +67,7 @@ const Analytics = () => {
               </Grid>
             ))}
           </Grid>
-          <Grid size={7}>
+          <Grid size={{sm:7, xs:12}}>
             <Card
               sx={{
                 bgcolor: `${isDark ? '#2c2c3e' : undefined}`,
@@ -76,7 +76,7 @@ const Analytics = () => {
               <BarHChart />
             </Card>
           </Grid>
-          <Grid size={8}>
+          <Grid size={{sm:8, xs:12}}>
             <Card
               sx={{
                 maxHeight: '286px',
@@ -90,7 +90,7 @@ const Analytics = () => {
           </Grid>
 
           <Grid
-            size={4}
+            size={{sm:4, xs:12}}
             sx={{
               display: 'flex',
               justifyContent: 'center',

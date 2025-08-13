@@ -10,7 +10,7 @@ export const MyContext = createContext();
 const locations = asiaList;
 
 const DrawerProvider = ({ children }) => {
-  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+const [screenWidth, setScreenWidth] = useState(() => window.innerWidth);
   const storedDrawer = getFromLocalStorage('drawerOpen');
   const storedTheme = getFromLocalStorage('isDark');
   const [isDrawerOpen, setIsDrawerOpen] = useState(
@@ -47,12 +47,16 @@ const DrawerProvider = ({ children }) => {
     }
   };
 
-  const handleResize = () => setScreenWidth(window.innerWidth);
 
   useEffect(() => {
     getProfileData();
 
-    window.addEventListener('resize', handleResize);
+    const handleResize = () => {
+    setScreenWidth(window.innerWidth);
+  };
+
+  window.addEventListener('resize', handleResize);
+  handleResize(); // ensures it syncs immediately on mount
 
     return () => {
       window.removeEventListener('resize', handleResize);

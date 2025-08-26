@@ -12,6 +12,9 @@ import CustomCard from './CustomCard';
 import { useContext, useState } from 'react';
 import { MyContext } from '../context/DrawerState';
 import CustomDivider from './CustomDivider';
+import SettingHeadings from './SettingHeadings';
+import DarkGrayTypography from './DarkGrayTypography';
+import CustomToggle from './CustomToggle';
 const types = ['Super Admin', 'Admin', 'User', 'Default'];
 
 const MyAccount = () => {
@@ -22,6 +25,7 @@ const MyAccount = () => {
     isDark,
     userType,
     handleUserType,
+    isSmallScreen
     
   } = useContext(MyContext);
 
@@ -29,36 +33,25 @@ const MyAccount = () => {
     <Stack spacing={2} fontFamily="sans-serif">
       <CustomCard sx={{ minWidth: 50 + '%', pb: '0px', height: '53%' }}>
         <Stack spacing={2.2}>
-          <Typography
-            variant="h5"
-            sx={{
-              fontSize: '19px',
-              fontWeight: '600',
-              fontFamily: 'sans-serif',
-            }}
-            component="h4"
-          >
-            General Setting
-          </Typography>
+          <SettingHeadings>General Setting</SettingHeadings>
           <CustomDivider />
 
           <Grid
             container
-            rowSpacing={3.5}
+            rowSpacing={{sm:3.5, xs: 2.5}}
             columnSpacing={2}
             sx={{ pt: '10.9px' }}
           >
-            <Grid size={6}>
-              <CustomTextField size="large" type="text" label="Contact Phone" />
+            <Grid size={{sm:6, xs:12}}>
+              <CustomTextField type="text" label="Contact Phone" />
             </Grid>
-            <Grid size={6}>
-              <CustomTextField size="large" type="text" label="Email" />
+            <Grid size={{sm:6, xs:12}}>
+              <CustomTextField type="text" label="Email" />
             </Grid>
-            <Grid size={6}>
+            <Grid size={{sm:6, xs:12}}>
               <CustomTextField
                 valueVariable={userType}
                 handleChange={handleUserType}
-                size="large"
                 label="User Type"
                 extraprops={{ select: true }}
                 children={types.map((option, idx) => (
@@ -68,11 +61,10 @@ const MyAccount = () => {
                 ))}
               />
             </Grid>
-            <Grid size={6}>
+            <Grid size={{sm:6, xs:12}}>
               <CustomTextField
                 valueVariable={location}
                 handleChange={handleLocation}
-                size="large"
                 label="Location"
                 extraprops={{ select: true }}
                 children={locations.map((option, idx) => (
@@ -89,48 +81,22 @@ const MyAccount = () => {
       {/* Advanced Settings */}
 
       <CustomCard sx={{ minWidth: 50 + '%', pb: '0px', height: '53%' }}>
-        <Typography
-          variant="h5"
-          sx={{
-            fontSize: '19px',
-            fontWeight: '600',
-          }}
-          component="h4"
-        >
-          Advanced Setting
-        </Typography>
-        <Divider sx={{ mt: 2.2 }} />
+        <SettingHeadings>Advanced Setting</SettingHeadings>
+          <CustomDivider sx={{mt: 2.2}}/>
 
-        <Typography
-          variant="body1"
-          component="span"
-          sx={{
-            color: isDark ? 'rgba(255, 255, 255, 0.7)' : 'rgba(0, 0, 0, 0.6)',
-          }}
-        >
-          Assign responsibility
-        </Typography>
-        <FormControlLabel
-          sx={{ display: 'block' }}
-          control={<Switch checked={true} />}
-          label="Gilad Gray"
-        />
-        <FormControlLabel
-          sx={{ display: 'block' }}
-          control={<Switch checked={false} />}
-          label="Json Killian"
-        />
-        <FormControlLabel
-          sx={{ display: 'block' }}
-          control={<Switch checked={true} />}
-          label="Antoine Llorca"
-        />
+        <DarkGrayTypography sx={{ fontSize: {sm:'16px', xs: '13.5px'} }}>
+                Assign responsibility
+              </DarkGrayTypography>
+              <CustomToggle label='Gilad Gray' status={true}/>
+              <CustomToggle label='Json Killian' status={false}/>
+              <CustomToggle label='Antoine Llorca' status={true}/>
+          
         <Typography
           variant="body2"
           component="span"
           sx={{
             color: 'error.main',
-            fontSize: '13.5px',
+            fontSize: {sm:'13.5px', xs: '12px'},
             fontFamily: 'Roboto Mono',
             fontWeight: 500,
             mt: 2,

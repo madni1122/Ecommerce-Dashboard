@@ -8,46 +8,48 @@ import { useContext } from 'react';
 import { MyContext } from '../context/DrawerState';
 import DarkGrayTypography from './DarkGrayTypography';
 import BlackTypography from './BlackTypography';
+import SettingHeadings from './SettingHeadings';
+import CustomSkeleton from './CustomSkeleton';
+
 
 const Profile = () => {
-  const { isDark, ProfileData } = useContext(MyContext);
+  const { isDark, ProfileData, isMediumScreen, isSmallScreen } = useContext(MyContext);
+  const detailts = [{heading: 'Full Name:', value: ProfileData.name}, {heading: "Father's Name:", value: ProfileData.fatherName}, {heading: 'Address:', value: ProfileData.address}, {heading: 'Zip Code:', value: ProfileData.zipCode}, {heading: 'Website', value: ProfileData.url}]
 
   return (
     <Box>
-      <Stack direction="row" spacing={2}>
-        <CustomCard sx={{ minWidth: 374, pb: '18.5px', height: '53%' }}>
+      <Stack direction={isMediumScreen?'column': 'row'} spacing={2}>
+        <CustomCard sx={{ minWidth: '50%', pb: '18.5px', height: '53%' }}>
           <Stack spacing={2.2}>
-            <BlackTypography
-              variant="h5"
-              sx={{
-                fontSize: '19px',
-                fontWeight: '600',
-                fontFamily: 'sans-serif',
-              }}
-            >
-              M Madni
-            </BlackTypography>
+            <SettingHeadings sx={{textAlign: isSmallScreen?"center":'left'}}>M Madni</SettingHeadings>
             <CustomDivider />
-            <Stack direction="row" spacing={4} pl={2}>
-              <MailIcon />
-              <DarkGrayTypography sx={{ fontSize: '15.5px' }}>
-                {ProfileData.email}
-              </DarkGrayTypography>
-            </Stack>
-            <CustomDivider />
-            <Stack direction="row" spacing={4} pl={2}>
-              <StayCurrentPortraitIcon />
-              <DarkGrayTypography sx={{ fontSize: '15.5px' }}>
-                {ProfileData.contactWithCode}
-              </DarkGrayTypography>
-            </Stack>
-            <CustomDivider />
-            <Stack direction="row" spacing={4} pl={2}>
-              <LocationOnIcon />
-              <DarkGrayTypography sx={{ fontSize: '15.5px' }}>
-                {ProfileData.location}
-              </DarkGrayTypography>
-            </Stack>
+          { [{icon: <MailIcon />, value:ProfileData.email}, {icon: <StayCurrentPortraitIcon />, value:ProfileData.contactWithCode}, {icon: <LocationOnIcon />, value:ProfileData.location}].map(({icon, value}, idx)=>(
+            <>
+            <Stack
+          key={idx}
+  direction={{ xs: "column", sm: "row" }} // column on mobile, row on tablet+
+  spacing={1.7}
+  pl={{sm:2, xs:0}}
+  alignItems="center" // keeps column layout neat
+>
+  {value?<>
+   {icon}
+  <DarkGrayTypography sx={{ fontSize: { xs: "14px", sm: "15.5px" }, overflowWrap: "anywhere",   // allow wrapping for long words
+    textAlign: isSmallScreen?"center": 'left' }}>
+    {value} 
+  </DarkGrayTypography>
+  </>
+ :
+ <>
+  
+ <CustomSkeleton width={26} height={26} variant="circular" />
+ <CustomSkeleton width='45%' height={19} sx={{ml: '18px'}}/>
+ </>}
+</Stack>
+{idx!==2&&<CustomDivider />}
+            </>
+            ))}
+
           </Stack>
         </CustomCard>
 
@@ -55,148 +57,61 @@ const Profile = () => {
 
         <CustomCard sx={{ flexGrow: 1, pb: '18.5px' }}>
           <Stack spacing={2.2}>
-            <BlackTypography
-              variant="h5"
-              sx={{
-                fontSize: '19px',
-                fontWeight: '600',
-                fontFamily: 'sans-serif',
-              }}
-            >
-              About me
-            </BlackTypography>
+            <SettingHeadings>About me</SettingHeadings>
             <CustomDivider />
             <Typography
               variant="body2"
-              sx={{ color: `${isDark ? '#e0e0e0' : '#3e3d3d'}` }}
+              sx={{ color: `${isDark ? '#e0e0e0' : '#3e3d3d'}`, fontSize: { xs: "13px", sm: "14px" } }}
               component="h4"
               pb={1.5}
             >
-              {ProfileData.bio}
+              {ProfileData.bio?ProfileData.bio: <>
+                <CustomSkeleton />
+                <CustomSkeleton />
+                <CustomSkeleton width='25%' />
+              </>}
             </Typography>
-            <Typography
-              variant="h5"
-              sx={{
-                fontSize: '19px',
-                fontWeight: '600',
-                fontFamily: 'sans-serif',
-              }}
-              component="h4"
-            >
-              Details
-            </Typography>
+            <SettingHeadings>Details</SettingHeadings>
             <CustomDivider />
-            <Stack direction="row" spacing={4} pl={2}>
-              <BlackTypography
-                sx={{
-                  fontSize: '14.5px',
-                  fontWeight: '500',
-                  minWidth: '125px',
-                }}
-              >
-                Full Name:
-              </BlackTypography>
-              <DarkGrayTypography
-                sx={{
-                  fontSize: '15.5px',
-                  fontWeight: 300,
-                }}
-                variant="body2"
-              >
-                {ProfileData.name}
-              </DarkGrayTypography>
-            </Stack>
-            <CustomDivider />
-            <Stack direction="row" spacing={4} pl={2}>
-              <BlackTypography
-                sx={{
-                  fontSize: '14.5px',
-                  fontWeight: '500',
-                  minWidth: '125px',
-                }}
-              >
-                Father's Name:
-              </BlackTypography>
-              <DarkGrayTypography
-                sx={{
-                  fontSize: '15.5px',
-                  fontWeight: 300,
-                }}
-                variant="body2"
-              >
-                {ProfileData.fatherName}
-              </DarkGrayTypography>
-            </Stack>
-            <CustomDivider />
-            <Stack direction="row" spacing={4} pl={2}>
-              <BlackTypography
-                sx={{
-                  fontSize: '14.5px',
-                  fontWeight: '500',
-                  minWidth: '125px',
-                }}
-              >
-                Address:
-              </BlackTypography>
-              <DarkGrayTypography
-                sx={{
-                  fontSize: '15.5px',
-                  fontWeight: 300,
-                }}
-                variant="body2"
-              >
-                {ProfileData.address}
-              </DarkGrayTypography>
-            </Stack>
-            <CustomDivider />
-            <Stack direction="row" spacing={4} pl={2}>
-              <BlackTypography
-                sx={{
-                  fontSize: '14.5px',
-                  fontWeight: '500',
-                  minWidth: '125px',
-                }}
-              >
-                Zip Code:
-              </BlackTypography>
 
-              <DarkGrayTypography
-                sx={{
-                  fontSize: '15.5px',
-                  fontWeight: 300,
-                }}
-                variant="body2"
-              >
-                {ProfileData.zipCode}
-              </DarkGrayTypography>
-            </Stack>
-            {ProfileData.url && (
-              <>
-                <CustomDivider />
-                <Stack direction="row" spacing={4} pl={2}>
-                  <BlackTypography
-                    variant="body2"
-                    component="h4"
-                    sx={{
-                      fontSize: '14.5px',
-                      fontWeight: '500',
-                      minWidth: '125px',
-                    }}
-                  >
-                    Website:
-                  </BlackTypography>
-                  <DarkGrayTypography
-                    sx={{
-                      fontSize: '15.5px',
-                      fontWeight: 300,
-                    }}
-                    variant="body2"
-                  >
-                    {ProfileData.url}
-                  </DarkGrayTypography>
-                </Stack>
-              </>
-            )}
+            {detailts.map(({heading, value}, idx)=>{
+
+            if(heading==='Website'&&!value) return null
+            return <>
+            <Stack
+  direction={{ xs: "column", sm: "row" }} // column on mobile, row on tablet+
+  spacing={1.2}
+  pl={{ sm: 2, xs: 0 }}
+  alignItems={{ xs: "flex-start", sm: "center" }}
+>
+  <BlackTypography
+    sx={{
+      fontSize: { xs: "13.5px", sm: "14.5px" },
+      fontWeight: 500,
+      minWidth: { sm: "125px", xs: "auto" }, // remove minWidth on mobile
+    }}
+  >
+    {value?heading:<CustomSkeleton width={85}/>}
+  </BlackTypography>
+
+  {value?<DarkGrayTypography
+    sx={{
+      fontSize: { xs: "14.5px", sm: "15.5px" },
+      fontWeight: 300,
+    }}
+    variant="body2"
+  >
+    {value}
+  </DarkGrayTypography>: <CustomSkeleton width={isSmallScreen?"100%": '65%'}/>}
+  
+
+  
+</Stack>
+{<CustomDivider />}
+            </>
+            }
+)}
+          
           </Stack>
         </CustomCard>
       </Stack>

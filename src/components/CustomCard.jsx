@@ -8,7 +8,7 @@ const CustomCard = ({ children, sx = {} }) => {
   return (
     <Card
       sx={{
-        bgcolor: `${isDark ? '#373753ff' : undefined}`,
+        bgcolor: `${isDark ? '#373753ff' : '#fafaf9'}`,
         color: `${isDark ? 'white' : undefined}`,
         ...sx,
       }}

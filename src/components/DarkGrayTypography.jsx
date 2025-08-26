@@ -15,6 +15,7 @@ const DarkGrayTypography = ({
       variant={variant}
       sx={{
         color: `${isDark ? '#bcbcbc' : '#535353ff'}`,
+        overflowWrap: "anywhere",
         ...sx,
       }}
       component={component}

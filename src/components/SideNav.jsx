@@ -22,8 +22,8 @@ const setDrawerWidth = (scrWidth) => {
   return scrWidth >= 1200 ? drawerWidth : scrWidth >= 800 ? 190 : 175;
 };
 
-const openedMixin = (theme, screenWidth) => ({
-  width: setDrawerWidth(screenWidth),
+const openedMixin = (theme, screenwidth) => ({
+  width: setDrawerWidth(screenwidth),
   transition: theme.transitions.create('width', {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.enteringScreen,
@@ -54,8 +54,8 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 
 const Drawer = styled(MuiDrawer, {
   shouldForwardProp: (prop) => prop !== 'open',
-})(({ theme, screenWidth }) => ({
-  width: setDrawerWidth(screenWidth),
+})(({ theme, screenwidth }) => ({
+  width: setDrawerWidth(screenwidth),
   flexShrink: 0,
   whiteSpace: 'nowrap',
   boxSizing: 'border-box',
@@ -63,8 +63,8 @@ const Drawer = styled(MuiDrawer, {
     {
       props: ({ open }) => open,
       style: {
-        ...openedMixin(theme, screenWidth),
-        '& .MuiDrawer-paper': openedMixin(theme, screenWidth),
+        ...openedMixin(theme, screenwidth),
+        '& .MuiDrawer-paper': openedMixin(theme, screenwidth),
       },
     },
     {
@@ -78,9 +78,8 @@ const Drawer = styled(MuiDrawer, {
 }));
 
 export default function SideNav() {
-  const { screenWidth } = React.useContext(MyContext);
+  const { screenwidth } = React.useContext(MyContext);
 
-  console.log(screenWidth);
   const { isDrawerOpen } = React.useContext(MyContext);
   const navigate = useNavigate();
   const { isDark } = React.useContext(MyContext);
@@ -89,7 +88,7 @@ export default function SideNav() {
     <Box sx={{ display: 'block' }}>
       <Box sx={{ display: 'flex' }}>
         <Drawer
-          screenWidth={screenWidth}
+          screenwidth={screenwidth}
           variant="permanent"
           open={isDrawerOpen}
           sx={{
@@ -99,7 +98,7 @@ export default function SideNav() {
           slotProps={{
             paper: {
               sx: {
-                bgcolor: `${isDark ? '#2a2a40' : ''}`, // Dark background
+                bgcolor: `${isDark ? '#2a2a40' : '#fafaf9'}`, // Dark background
                 color: `${isDark ? '#fff' : ''}`, // Light text
                 borderRight: '1px solid rgba(255,255,255,0.1)', // Optional
               },

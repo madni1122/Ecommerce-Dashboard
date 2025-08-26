@@ -10,16 +10,18 @@ import CustomTextField from './CustomTextField';
 import CustomBtn from './CustomBtn';
 import checkError from '../utils/checkError';
 
-const style = {
+const style = ({isDark, isSmallScreen, isMediumScreen}) => ({
   position: 'absolute',
   top: '50%',
   left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
+  transform: 'translate(-50%, -50%)', 
+  width: isSmallScreen?270:isMediumScreen?340:400,
   border: '2px solid #000',
+  bgcolor: isDark ? '#3a3a5a' : 'background.paper',
+  color: isDark ? '#fff' : undefined,
   boxShadow: 24,
-  p: '51px 32px 32px',
-};
+  p: `51px ${isSmallScreen? '20px': '32px'}  32px`,
+});
 const categories = ['Laptop', 'Mobile', 'Electronics', 'Food'];
 
 export default function Popup({
@@ -38,7 +40,7 @@ export default function Popup({
   validation,
   submitAttemp,
 }) {
-  const { isDark } = useContext(MyContext);
+  const { isDark, isSmallScreen, isMediumScreen } = useContext(MyContext);
   style.bgcolor = `${isDark ? '#3a3a5a' : 'background.paper'}`;
   style.color = `${isDark ? '#fff' : undefined}`;
 
@@ -52,7 +54,7 @@ export default function Popup({
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
+        <Box sx={style({isDark, isSmallScreen, isMediumScreen})}>
           <IconButton
             sx={{
               position: 'absolute',
@@ -67,10 +69,10 @@ export default function Popup({
             <CloseRoundedIcon fontSize="medium" />
           </IconButton>
           <Typography
-            id="modal-modal-title"
+            id={children}
             variant="h5"
             component="h2"
-            sx={{ textAlign: 'center' }}
+            sx={{ textAlign: 'center', fontSize: isMediumScreen?'1.25rem': isSmallScreen?'1.1rem':'1.5rem' }}
           >
             {children}
           </Typography>

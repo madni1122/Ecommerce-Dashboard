@@ -90,7 +90,7 @@ export default function Header() {
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-  const { isDrawerOpen, setIsDrawerOpen, isDark, setIsDark, screenWidth } =
+  const { isDrawerOpen, setIsDrawerOpen, isDark, setIsDark, isMediumScreen } =
     React.useContext(MyContext);
 
   const handleProfileMenuOpen = (event) => {
@@ -133,8 +133,8 @@ export default function Header() {
   );
 
   const mobileMenuId = 'primary-search-account-menu-mobile';
-  const renderMobileMenu = (
-    <Menu
+  const renderMobileMenu =  () =>{
+return <Menu
       anchorEl={mobileMoreAnchorEl}
       anchorOrigin={{
         vertical: 'top',
@@ -148,6 +148,7 @@ export default function Header() {
       }}
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
+      // sx={{bgcolor: '#f9fafb'}}
     >
       <MenuItem>
         <IconButton size="large" aria-label="show 4 new mails" color="inherit">
@@ -181,21 +182,36 @@ export default function Header() {
         </IconButton>
         <p>Profile</p>
       </MenuItem>
+      <MenuItem onClick={() => setIsDark(!isDark)}>
+        <IconButton
+                size="large"
+                disableTouchRipple
+                sx={{
+                  color: 'inherit',
+                  transition: 'background-color 0.15s ease',
+                }}
+              >
+                {isDark?<DarkModeOutlinedIcon />:<LightModeOutlinedIcon />}
+              </IconButton>
+        <p>{isDark?'Light': 'Dark'}</p>
+      </MenuItem>
     </Menu>
-  );
+  }
+    
+  
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1, }}>
       <AppBar
         position="fixed"
         elevation={0}
         sx={{
-          bgcolor: `${isDark ? '#2a2a40' : 'white'}`,
+          bgcolor: `${isDark ? '#2a2a40' : '#fafaf9'}`,
           color: `${isDark ? '#e0e0e0' : '#2f2f2f'}`,
         }}
       >
         <Toolbar>
-          {screenWidth >= 700 && (
+          {!isMediumScreen && (
             <IconButton
               onClick={() => {
                 setIsDrawerOpen(!isDrawerOpen);
@@ -325,7 +341,7 @@ export default function Header() {
           </Box>
         </Toolbar>
       </AppBar>
-      {renderMobileMenu}
+      {renderMobileMenu()}
       {renderMenu}
     </Box>
   );

@@ -21,12 +21,13 @@ const PersonalDetails = () => {
     contact,
     getProfileData,
     ProfileData,
+    isMediumScreen,
+     name,
+        fatherName,
+        bio,
+        url, 
+        address
   } = useContext(MyContext);
-  const [name, setName] = useState(ProfileData.name);
-  const [fatherName, setFatherName] = useState(ProfileData.fatherName);
-  const [bio, setBio] = useState(ProfileData.bio);
-  const [url, setUrl] = useState(ProfileData.url);
-  const [address, setAddress] = useState(ProfileData.address);
   const [submitLoading, setSubmitLoading] = useState(false);
   const [validationErrors, setValidationErrors] = useState({});
   const [submitAttemp, setSubmitAttemp] = useState(false);
@@ -96,14 +97,8 @@ const PersonalDetails = () => {
 
   return (
     <Box>
-      <Stack width="100%" direction="row" spacing={2}>
+      <Stack width="100%" direction={isMediumScreen?'column':"row"} spacing={2}>
         <PersonalInformation
-          name={name}
-          setName={setName}
-          fatherName={fatherName}
-          setFatherName={setFatherName}
-          bio={bio}
-          setBio={setBio}
           validationErrors={validationErrors}
           submitAttemp={submitAttemp}
         />
@@ -112,10 +107,6 @@ const PersonalDetails = () => {
           regextTest={regextTest}
           contactRgx={contactRgx}
           emailRgx={emailRgx}
-          url={url}
-          setUrl={setUrl}
-          address={address}
-          setAddress={setAddress}
           validationErrors={validationErrors}
           submitAttemp={submitAttemp}
         />

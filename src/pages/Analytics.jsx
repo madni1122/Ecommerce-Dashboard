@@ -28,7 +28,7 @@ const Analytics = () => {
         <Grid container spacing={2}>
           <Grid container spacing={2} size={{sm:5, xs:12}}>
             {visitors.map(({ id, visitors }, idx) => (
-              <Grid size={{xs: 6, sm: 6}} key={idx}>
+              <Grid size={{xs: 12, sm: 6}} key={idx}>
                 <Card
                   sx={{
                     padding: '0 20px',
@@ -99,6 +99,7 @@ const Analytics = () => {
           >
             <Card
               sx={{
+                width: '100%',
                 maxHeight: '286px',
                 bgcolor: `${isDark ? '#2c2c3e' : undefined}`,
               }}

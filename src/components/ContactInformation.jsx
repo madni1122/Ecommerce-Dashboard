@@ -1,4 +1,4 @@
-import { Grid, Stack } from '@mui/material';
+import { Box, Grid, Stack } from '@mui/material';
 import CustomTextField from './CustomTextField';
 import CustomTextarea from './CustomTextarea';
 import CustomCard from './CustomCard';
@@ -7,32 +7,25 @@ import CustomDivider from './CustomDivider';
 import { useContext } from 'react';
 import { MyContext } from '../context/DrawerState';
 import checkError from '../utils/checkError';
+import SettingHeadings from './SettingHeadings';
+import CustomProgress from './CustomProgress';
 
 const PersonalInformation = ({
-  url,
-  setUrl,
-  address,
-  setAddress,
   validationErrors,
   contactRgx,
   emailRgx,
   submitAttemp,
   regextTest,
 }) => {
-  const { contact, setContact, email, setEmail } = useContext(MyContext);
+  const { contact, setContact, email, setEmail,  url, 
+        setUrl,
+        address,
+        setAddress } = useContext(MyContext);
   return (
-    <CustomCard sx={{ minWidth: 50 + '%', pb: '18.5px', height: '53%' }}>
-      <Stack spacing={2.2}>
-        <BlackTypography
-          variant="h5"
-          sx={{
-            fontSize: '19px',
-            fontWeight: '600',
-            fontFamily: 'sans-serif',
-          }}
-        >
-          Contact Information
-        </BlackTypography>
+    <CustomCard sx={{ minWidth: 48 + '%', pb: '18.5px', minHeight: '53%' }}>
+     {contact? <Stack spacing={2.2}>
+         <SettingHeadings>Contact Information</SettingHeadings>
+          
         <CustomDivider />
 
         <Grid
@@ -41,7 +34,7 @@ const PersonalInformation = ({
           columnSpacing={2}
           sx={{ pt: '10.9px' }}
         >
-          <Grid size={6}>
+          <Grid size={{sm:6, xs:12}}>
             <CustomTextField
               helperText={
                 contact.length && !contactRgx.test(contact.trim())
@@ -53,7 +46,6 @@ const PersonalInformation = ({
                 !regextTest(contactRgx, contact.trim())
               }
               required={validationErrors.contact}
-              size="large"
               type="text"
               label="Contact Phone"
               valueVariable={contact}
@@ -62,7 +54,7 @@ const PersonalInformation = ({
               }}
             />
           </Grid>
-          <Grid size={6}>
+          <Grid size={{sm:6, xs:12}}>
             <CustomTextField
               helperText={
                 email.length && !emailRgx.test(email.trim())
@@ -74,7 +66,6 @@ const PersonalInformation = ({
                 !regextTest(emailRgx, email.trim())
               }
               required={validationErrors.email}
-              size="large"
               type="text"
               label="Email"
               valueVariable={email}
@@ -85,7 +76,6 @@ const PersonalInformation = ({
           </Grid>
           <Grid size={12}>
             <CustomTextField
-              size="large"
               type="text"
               label="Profile URL"
               valueVariable={url}
@@ -108,7 +98,13 @@ const PersonalInformation = ({
             />
           </Grid>
         </Grid>
-      </Stack>
+      </Stack>:<Box sx={{
+       width: "100%",
+    minHeight: "50vh",             // 👈 fills full card height
+    display: "flex",
+    justifyContent: "center",   // horizontal center
+    alignItems: "center",  
+    }}><CustomProgress /></Box>}
     </CustomCard>
   );
 };

@@ -1,4 +1,4 @@
-import { Grid, MenuItem, Stack } from '@mui/material';
+import { Box, Grid, MenuItem, Stack } from '@mui/material';
 import CustomTextField from './CustomTextField';
 import CustomTextarea from './CustomTextarea';
 import CustomCard from './CustomCard';
@@ -7,42 +7,34 @@ import CustomDivider from './CustomDivider';
 import { useContext } from 'react';
 import { MyContext } from '../context/DrawerState';
 import checkError from '../utils/checkError';
+import SettingHeadings from './SettingHeadings';
+import CustomProgress from './CustomProgress';
 const types = ['Super Admin', 'Admin', 'User', 'Default'];
 
 const PersonalInformation = ({
-  name,
-  setName,
-  fatherName,
-  setFatherName,
-  bio,
-  setBio,
   validationErrors,
   submitAttemp,
 }) => {
-  const { location, locations, handleLocation, userType, handleUserType } =
+  const { location, locations, handleLocation, userType, handleUserType,  name,
+        setName,
+        fatherName,
+        setFatherName,
+        bio,
+        setBio, } =
     useContext(MyContext);
   return (
-    <CustomCard sx={{ minWidth: 50 + '%', pb: '18.5px', height: '53%' }}>
-      <Stack spacing={2.2}>
-        <BlackTypography
-          variant="h5"
-          sx={{
-            fontSize: '19px',
-            fontWeight: '600',
-            fontFamily: 'sans-serif',
-          }}
-        >
-          Personal Information
-        </BlackTypography>
+    <CustomCard sx={{ minWidth: 48 + '%', pb: '18.5px', minHeight: '53%' }}>
+     {location? <Stack spacing={2.2}>
+        <SettingHeadings>Personal Information</SettingHeadings>
         <CustomDivider />
 
-        <Grid
+       <Grid
           container
           rowSpacing={3.5}
           columnSpacing={2}
           sx={{ pt: '10.9px' }}
         >
-          <Grid size={6}>
+          <Grid size={{sm:6, xs:12}}>
             <CustomTextField
               error={checkError(validationErrors.name, submitAttemp)}
               required={validationErrors.name}
@@ -55,18 +47,16 @@ const PersonalInformation = ({
               }}
             />
           </Grid>
-          <Grid size={6}>
+          <Grid size={{sm:6, xs:12}}>
             <CustomTextField
               error={checkError(validationErrors.fatherName, submitAttemp)}
               required={validationErrors.fatherName}
-              size="large"
               type="text"
               label="Father Name"
               valueVariable={fatherName}
               handleChange={(val) => {
                 setFatherName(val);
               }}
-              required
             />
           </Grid>
           <Grid size={12}>
@@ -79,7 +69,7 @@ const PersonalInformation = ({
               }}
             />
           </Grid>
-          <Grid size={6}>
+          <Grid size={{sm:6, xs:12}}>
             <CustomTextField
               error={checkError(validationErrors.userType, submitAttemp)}
               required={validationErrors.userType}
@@ -95,7 +85,7 @@ const PersonalInformation = ({
               ))}
             />
           </Grid>
-          <Grid size={6}>
+          <Grid size={{sm:6, xs:12}}>
             <CustomTextField
               error={checkError(validationErrors.location, submitAttemp)}
               required={validationErrors.location}
@@ -112,7 +102,14 @@ const PersonalInformation = ({
             />
           </Grid>
         </Grid>
-      </Stack>
+      </Stack>:
+      <Box sx={{
+       width: "100%",
+    minHeight: "50vh",             // 👈 fills full card height
+    display: "flex",
+    justifyContent: "center",   // horizontal center
+    alignItems: "center",  
+    }}><CustomProgress /></Box>}
     </CustomCard>
   );
 };

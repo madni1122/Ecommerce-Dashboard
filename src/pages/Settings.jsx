@@ -10,6 +10,9 @@ import Profile from '../components/Profile';
 import PersonalDetails from '../components/PersonalDetails';
 import { MyContext } from '../context/DrawerState';
 import MyAccount from '../components/MyAccount';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import ManageAccountsRoundedIcon from '@mui/icons-material/ManageAccountsRounded';
+import PersonAddAltRoundedIcon from '@mui/icons-material/PersonAddAltRounded';
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -22,7 +25,7 @@ function CustomTabPanel(props) {
       aria-labelledby={`simple-tab-${index}`}
       {...other}
     >
-      {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
+      {value === index && <Box sx={{ px: {lg:3, sm:1, xs:0}, py:3}}>{children}</Box>}
     </div>
   );
 }
@@ -116,13 +119,13 @@ export default function Settings() {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  const { isDark } = React.useContext(MyContext);
+  const { isDark, isSmallScreen } = React.useContext(MyContext);
 
   return (
     <Card
       sx={{ minHeight: '83vh', bgcolor: `${isDark ? '#2c2c3e' : undefined}` }}
     >
-      <CardContent>
+      <CardContent sx={{p: {xs:'16px 10px', sm: '16px'}}}>
         <Box
           sx={{
             width: '100%',
@@ -141,9 +144,9 @@ export default function Settings() {
               onChange={handleChange}
               aria-label="ant example"
             >
-              <AntTab label="Profile" isDark={isDark} />
-              <AntTab label="Personal Details" isDark={isDark} />
-              <AntTab label="My Account" isDark={isDark} />
+              <AntTab label={isSmallScreen?<AccountCircleIcon />:"Profile"} isDark={isDark} />
+              <AntTab label={isSmallScreen?<ManageAccountsRoundedIcon />:"Personal Details"} isDark={isDark} />
+              <AntTab label={isSmallScreen?<PersonAddAltRoundedIcon />:"My Account"} isDark={isDark} />
             </AntTabs>
             <CustomTabPanel value={value} index={0}>
               <Profile />

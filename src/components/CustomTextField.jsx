@@ -14,36 +14,45 @@ const CustomTextField = ({
   size,
   ...rest
 }) => {
-  const { isDark } = useContext(MyContext);
+  const { isDark, isSmallScreen, isMediumScreen } = useContext(MyContext);
 
   return (
     <TextField
       
       error={error}
-      size={size}
+      size={isSmallScreen?'small':isMediumScreen? 'medium':'large'}
       sx={{
-        width: '100%',
-        input: {
-          color: isDark ? '#fff' : '#000',
-        },
-        label: {
-          color: isDark ? '#bbb' : '#000',
-        },
-        '& .MuiOutlinedInput-root': {
-          '& fieldset': {
-            borderColor: isDark ? '#555' : undefined, // Default border
-          },
-        },
-        '& .MuiFormHelperText-root': {
-          color: isDark ? '#f88' : undefined,
-        },
-        '& .MuiSelect-icon': {
-          color: isDark ? '#ccc' : undefined, // light color in dark mode
-        },
-        '& .MuiSelect-select': {
-          color: isDark ? '#fff' : '#000', // selected value text color
-        },
-      }}
+    width: "100%",
+    input: {
+      color: isDark ? "#fff" : "#000",
+      fontSize: isSmallScreen ? "14px" : "normal",
+    },
+    label: {
+      color: isDark ? "#bbb" : "#000",
+      fontSize: isSmallScreen ? "14px" : "normal",
+    },
+    "& .MuiOutlinedInput-root": {
+      "& fieldset": {
+        borderColor: isDark ? "#555" : undefined, 
+      },
+      "&:hover fieldset": {
+        borderColor: isDark ? "#aaa" : undefined, 
+      },
+      "&.Mui-focused fieldset": {
+        borderColor: isDark ? "#90caf9" : undefined, 
+      },
+    },
+    "& .MuiFormHelperText-root": {
+      color: isDark ? "#f88" : undefined,
+    },
+    "& .MuiSelect-icon": {
+      color: isDark ? "#ccc" : undefined,
+    },
+    "& .MuiSelect-select": {
+      color: isDark ? "#fff" : "#000",
+      fontSize: isSmallScreen ? "14px" : "normal",
+    },
+  }}
       id="outlined-basic"
       type={type}
       label={label}

@@ -28,7 +28,7 @@ export default function ResponsiveTableCards({
 
   const handleTextOverflow = (string) => {
     if (string.length >= 13 && textOverflowRange)
-      return string.slice(0, 8).trim() + "...";
+      return string.slice(0, 11).trim() + "...";
     return string;
   };
 

@@ -182,7 +182,10 @@ return <Menu
         </IconButton>
         <p>Profile</p>
       </MenuItem>
-      <MenuItem onClick={() => setIsDark(!isDark)}>
+      <MenuItem onClick={() => {
+        setIsDark(!isDark)
+        handleMobileMenuClose()
+      }}>
         <IconButton
                 size="large"
                 disableTouchRipple

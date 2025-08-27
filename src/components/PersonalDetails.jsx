@@ -1,5 +1,5 @@
 import { Box, Button, Stack } from '@mui/material';
-import PersonalInformation from './personalInformation';
+import PersonalInformation from './PersonalInformation';
 import ContactInformation from './ContactInformation';
 import { useContext, useEffect, useState } from 'react';
 import CustomBtn from './CustomBtn';

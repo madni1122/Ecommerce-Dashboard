@@ -16,7 +16,7 @@ const DrawerProvider = ({ children }) => {
   const storedDrawer = getFromLocalStorage('drawerOpen');
   const storedTheme = getFromLocalStorage('isDark');
   const [isDrawerOpen, setIsDrawerOpen] = useState(
-    typeof storedDrawer === 'boolean' ? storedDrawer : true
+    typeof storedDrawer === 'boolean' ? storedDrawer : isSmallScreen?false:true
   );
 
   const [isDark, setIsDark] = useState(

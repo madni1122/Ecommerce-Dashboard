@@ -143,6 +143,7 @@ export default function Settings() {
               value={value}
               onChange={handleChange}
               aria-label="ant example"
+              variant={isSmallScreen?'fullWidth': 'standard'}
             >
               <AntTab label={isSmallScreen?<AccountCircleIcon />:"Profile"} isDark={isDark} />
               <AntTab label={isSmallScreen?<ManageAccountsRoundedIcon />:"Personal Details"} isDark={isDark} />

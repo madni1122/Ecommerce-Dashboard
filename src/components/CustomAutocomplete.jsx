@@ -29,7 +29,8 @@ const CustomAutocomplete = ({ handleChange, options, width }) => {
               ? '0px 4px 10px rgba(255,255,255,0.1)'
               : '0px 4px 12px rgba(0,0,0,0.1)',
             borderRadius: 2,
-            pl:3
+            textAlign:isSmallScreen?'center':'left',
+            fontSize: isSmallScreen ? '13px' : '15px', 
           },
         },
         popper: {

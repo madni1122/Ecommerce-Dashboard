@@ -1,18 +1,18 @@
-import * as React from 'react';
-import { styled } from '@mui/material/styles';
-import PropTypes from 'prop-types';
+import * as React from "react";
+import { styled } from "@mui/material/styles";
+import Tab from "@mui/material/Tab";
+import PropTypes from "prop-types";
 
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import Box from '@mui/material/Box';
-import { Card, CardContent } from '@mui/material';
-import Profile from '../components/Profile';
-import PersonalDetails from '../components/PersonalDetails';
-import { MyContext } from '../context/DrawerState';
-import MyAccount from '../components/MyAccount';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import ManageAccountsRoundedIcon from '@mui/icons-material/ManageAccountsRounded';
-import PersonAddAltRoundedIcon from '@mui/icons-material/PersonAddAltRounded';
+import Tabs from "@mui/material/Tabs";
+import Box from "@mui/material/Box";
+import { Card, CardContent } from "@mui/material";
+import Profile from "../components/Profile";
+import PersonalDetails from "../components/PersonalDetails";
+import { MyContext } from "../context/DrawerState";
+import MyAccount from "../components/MyAccount";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import ManageAccountsRoundedIcon from "@mui/icons-material/ManageAccountsRounded";
+import PersonAddAltRoundedIcon from "@mui/icons-material/PersonAddAltRounded";
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -25,7 +25,9 @@ function CustomTabPanel(props) {
       aria-labelledby={`simple-tab-${index}`}
       {...other}
     >
-      {value === index && <Box sx={{ px: {lg:3, sm:1, xs:0}, py:3}}>{children}</Box>}
+      {value === index && (
+        <Box sx={{ px: { lg: 3, sm: 1, xs: 0 }, py: 3 }}>{children}</Box>
+      )}
     </div>
   );
 }
@@ -37,45 +39,45 @@ CustomTabPanel.propTypes = {
 };
 
 const AntTabs = styled(Tabs)({
-  borderBottom: '1px solid #e8e8e8',
-  '& .MuiTabs-indicator': {
-    backgroundColor: '#1890ff',
+  borderBottom: "1px solid #e8e8e8",
+  "& .MuiTabs-indicator": {
+    backgroundColor: "#1890ff",
   },
 });
 
-const AntTab = styled((props) => {
-  return <Tab disableRipple {...props} />;
+const AntTab = styled(Tab, {
+  shouldForwardProp: (prop) => prop !== "isDark",
 })(({ theme, isDark }) => ({
-  textTransform: 'none',
+  textTransform: "none",
   minWidth: 0,
-  [theme.breakpoints.up('sm')]: {
+  [theme.breakpoints.up("sm")]: {
     minWidth: 0,
   },
   fontWeight: theme.typography.fontWeightRegular,
   marginRight: theme.spacing(1),
-  color: `${isDark ? 'white' : 'rgba(0, 0, 0, 0.85)'}`,
+  color: `${isDark ? "white" : "rgba(0, 0, 0, 0.85)"}`,
   fontFamily: [
-    '-apple-system',
-    'BlinkMacSystemFont',
+    "-apple-system",
+    "BlinkMacSystemFont",
     '"Segoe UI"',
-    'Roboto',
+    "Roboto",
     '"Helvetica Neue"',
-    'Arial',
-    'sans-serif',
+    "Arial",
+    "sans-serif",
     '"Apple Color Emoji"',
     '"Segoe UI Emoji"',
     '"Segoe UI Symbol"',
-  ].join(','),
-  '&:hover': {
-    color: '#40a9ff',
+  ].join(","),
+  "&:hover": {
+    color: "#40a9ff",
     opacity: 1,
   },
-  '&.Mui-selected': {
-    color: '#1890ff',
+  "&.Mui-selected": {
+    color: "#1890ff",
     fontWeight: theme.typography.fontWeightMedium,
   },
-  '&.Mui-focusVisible': {
-    backgroundColor: '#d1eaff',
+  "&.Mui-focusVisible": {
+    backgroundColor: "#d1eaff",
   },
 }));
 
@@ -85,30 +87,30 @@ const StyledTabs = styled((props) => (
     TabIndicatorProps={{ children: <span className="MuiTabs-indicatorSpan" /> }}
   />
 ))({
-  '& .MuiTabs-indicator': {
-    display: 'flex',
-    justifyContent: 'center',
-    backgroundColor: 'transparent',
+  "& .MuiTabs-indicator": {
+    display: "flex",
+    justifyContent: "center",
+    backgroundColor: "transparent",
   },
-  '& .MuiTabs-indicatorSpan': {
+  "& .MuiTabs-indicatorSpan": {
     maxWidth: 40,
-    width: '100%',
-    backgroundColor: '#635ee7',
+    width: "100%",
+    backgroundColor: "#635ee7",
   },
 });
 
 const StyledTab = styled((props) => <Tab disableRipple {...props} />)(
   ({ theme }) => ({
-    textTransform: 'none',
+    textTransform: "none",
     fontWeight: theme.typography.fontWeightRegular,
     fontSize: theme.typography.pxToRem(15),
     marginRight: theme.spacing(1),
-    color: 'rgba(255, 255, 255, 0.7)',
-    '&.Mui-selected': {
-      color: '#fff',
+    color: "rgba(255, 255, 255, 0.7)",
+    "&.Mui-selected": {
+      color: "#fff",
     },
-    '&.Mui-focusVisible': {
-      backgroundColor: 'rgba(100, 95, 228, 0.32)',
+    "&.Mui-focusVisible": {
+      backgroundColor: "rgba(100, 95, 228, 0.32)",
     },
   })
 );
@@ -123,31 +125,48 @@ export default function Settings() {
 
   return (
     <Card
-      sx={{ minHeight: '83vh', bgcolor: `${isDark ? '#2c2c3e' : undefined}` }}
+      sx={{ minHeight: "83vh", bgcolor: `${isDark ? "#2c2c3e" : undefined}` }}
     >
-      <CardContent sx={{p: {xs:'16px 10px', sm: '16px'}}}>
+      <CardContent sx={{ p: { xs: "16px 10px", sm: "16px" } }}>
         <Box
           sx={{
-            width: '100%',
-            bgcolor: `${isDark ? '#2c2c3e' : undefined}`,
-            color: `${isDark ? 'white' : undefined}`,
+            width: "100%",
+            bgcolor: `${isDark ? "#2c2c3e" : undefined}`,
+            color: `${isDark ? "white" : undefined}`,
           }}
         >
           <Box
             sx={{
-              bgcolor: `${isDark ? '#2c2c3e' : undefined}`,
-              color: `${isDark ? 'white' : undefined}`,
+              bgcolor: `${isDark ? "#2c2c3e" : undefined}`,
+              color: `${isDark ? "white" : undefined}`,
             }}
           >
             <AntTabs
               value={value}
               onChange={handleChange}
               aria-label="ant example"
-              variant={isSmallScreen?'fullWidth': 'standard'}
+              variant={isSmallScreen ? "fullWidth" : "standard"}
             >
-              <AntTab label={isSmallScreen?<AccountCircleIcon />:"Profile"} isDark={isDark} />
-              <AntTab label={isSmallScreen?<ManageAccountsRoundedIcon />:"Personal Details"} isDark={isDark} />
-              <AntTab label={isSmallScreen?<PersonAddAltRoundedIcon />:"My Account"} isDark={isDark} />
+              <AntTab
+                label={isSmallScreen ? <AccountCircleIcon /> : "Profile"}
+                isDark={isDark}
+              />
+              <AntTab
+                label={
+                  isSmallScreen ? (
+                    <ManageAccountsRoundedIcon />
+                  ) : (
+                    "Personal Details"
+                  )
+                }
+                isDark={isDark}
+              />
+              <AntTab
+                label={
+                  isSmallScreen ? <PersonAddAltRoundedIcon /> : "My Account"
+                }
+                isDark={isDark}
+              />
             </AntTabs>
             <CustomTabPanel value={value} index={0}>
               <Profile />

@@ -42,6 +42,7 @@ import ResponsiveTableCards from "./TstingCompnt";
 import EditBtnIcon from "../components/EditBtnIcon";
 import DeleteBtnIcon from "../components/DeleteBtnIcon";
 import CustomSkeleton from "../components/CustomSkeleton";
+import CustomCard from "../components/CustomCard";
 const skeletonArray = [1, 2, 3];
 const tableHeading = ["Name", "Price", "Category", "Date", "Action"];
 
@@ -143,32 +144,30 @@ export default function Product() {
 
   const deleteProduct = async (id) => {
     let userDoc = doc(db, "products", id);
-    if(rows.length===1){
-      toast('Sorry! Atleast one product is needed.', {
-    type: 'error',
-  })
-      return
+    if (rows.length === 1) {
+      toast("Sorry! Atleast one product is needed.", {
+        type: "error",
+      });
+      return;
     }
     try {
       let result = await deleteDoc(userDoc);
       let result2 = await getProduts();
       Swal.fire({
-      title: "Deleted!",
-      text: "Your product has been deleted.",
-      icon: "success",
-    });
+        title: "Deleted!",
+        text: "Your product has been deleted.",
+        icon: "success",
+      });
     } catch (error) {
       console.log(error);
-       Swal.fire({
-      title: "Error!",
-      text: "Try again later.",
-      icon: "error  ",
-    });
+      Swal.fire({
+        title: "Error!",
+        text: "Try again later.",
+        icon: "error  ",
+      });
 
-    return
+      return;
     }
-    
-    
   };
 
   const handleDelete = (id) => {
@@ -271,12 +270,11 @@ export default function Product() {
         {popupTitle}
       </Popup>
 
-      <Paper
+      <CustomCard
+        disableCardContent={true}
         sx={{
           overflow: "hidden",
           px: "12px",
-          bgcolor: `${isDark ? "#2c2c3e" : ""}`,
-          color: `${isDark ? "#fff" : ""}`,
           boxSizing: "border-box",
           maxWidth: { md: "100%", xs: "100vw" },
         }}
@@ -344,7 +342,12 @@ export default function Product() {
         {!isMobile ? (
           <>
             <TableContainer
-              sx={{ maxHeight: 440, mt: "12px", overflowX: "auto", bgcolor: isDark?undefined:'#fafaf9' }}
+              sx={{
+                maxHeight: 440,
+                mt: "12px",
+                overflowX: "auto",
+                bgcolor: isDark ? undefined : "#fafaf9",
+              }}
             >
               <Table
                 sx={{ minWidth: 600 }}
@@ -358,7 +361,7 @@ export default function Product() {
                         key={title}
                         sx={{
                           color: `${isDark ? "#ffffff" : ""}`,
-                          bgcolor: `${isDark ? "#2c2c3e" : "#ffffff"}`,
+                          bgcolor: "transparent",
                         }}
                         align="left"
                         style={{ minWidth: "100px", fontWeight: 550 }}
@@ -378,7 +381,6 @@ export default function Product() {
                               width={165}
                               height={17.5}
                             />
-                           
                           </TableCell>
                           <TableCell>
                             <CustomSkeleton
@@ -395,7 +397,7 @@ export default function Product() {
                             />
                           </TableCell>
                           <TableCell>
-                           <CustomSkeleton
+                            <CustomSkeleton
                               variant="text"
                               width={100}
                               height={17.5}
@@ -489,7 +491,7 @@ export default function Product() {
             handleOpen={handleOpen}
           />
         )}
-      </Paper>
+      </CustomCard>
     </>
   );
 }

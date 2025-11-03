@@ -1,46 +1,47 @@
-import * as React from 'react';
-import { styled, alpha } from '@mui/material/styles';
-import MuiAppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import InputBase from '@mui/material/InputBase';
-import Badge from '@mui/material/Badge';
-import MenuItem from '@mui/material/MenuItem';
-import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
-import SearchIcon from '@mui/icons-material/Search';
-import AccountCircle from '@mui/icons-material/AccountCircle';
-import MailIcon from '@mui/icons-material/Mail';
-import NotificationsIcon from '@mui/icons-material/Notifications';
-import MoreIcon from '@mui/icons-material/MoreVert';
-import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
-import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
-import { MyContext } from '../context/DrawerState';
+import * as React from "react";
+import { styled, alpha } from "@mui/material/styles";
+import MuiAppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import InputBase from "@mui/material/InputBase";
+import Badge from "@mui/material/Badge";
+import MenuItem from "@mui/material/MenuItem";
+import Menu from "@mui/material/Menu";
+import ChevronLeftRoundedIcon from "@mui/icons-material/ChevronLeftRounded";
+import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded";
+import AccountCircle from "@mui/icons-material/AccountCircle";
+import StorefrontOutlinedIcon from "@mui/icons-material/StorefrontOutlined";
+import MailIcon from "@mui/icons-material/Mail";
+import NotificationsIcon from "@mui/icons-material/Notifications";
+import MoreIcon from "@mui/icons-material/MoreVert";
+import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
+import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
+import { MyContext } from "../context/DrawerState";
 
 const drawerWidth = 240;
 
-const Search = styled('div')(({ theme }) => ({
-  position: 'relative',
+const Search = styled("div")(({ theme }) => ({
+  position: "relative",
   borderRadius: theme.shape.borderRadius,
   backgroundColor: alpha(theme.palette.common.white, 0.15),
-  '&:hover': {
+  "&:hover": {
     backgroundColor: alpha(theme.palette.common.white, 0.25),
   },
   marginRight: theme.spacing(2),
   marginLeft: 0,
-  width: '100%',
-  [theme.breakpoints.up('sm')]: {
+  width: "100%",
+  [theme.breakpoints.up("sm")]: {
     marginLeft: theme.spacing(3),
-    width: 'auto',
+    width: "auto",
   },
 }));
 
 const AppBar = styled(MuiAppBar, {
-  shouldForwardProp: (prop) => prop !== 'open',
+  shouldForwardProp: (prop) => prop !== "open",
 })(({ theme }) => ({
-  transition: theme.transitions.create(['width', 'margin'], {
+  transition: theme.transitions.create(["width", "margin"], {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
   }),
@@ -50,7 +51,7 @@ const AppBar = styled(MuiAppBar, {
       style: {
         marginLeft: drawerWidth,
         width: `calc(100% - ${drawerWidth}px)`,
-        transition: theme.transitions.create(['width', 'margin'], {
+        transition: theme.transitions.create(["width", "margin"], {
           easing: theme.transitions.easing.sharp,
           duration: theme.transitions.duration.enteringScreen,
         }),
@@ -59,26 +60,26 @@ const AppBar = styled(MuiAppBar, {
   ],
 }));
 
-const SearchIconWrapper = styled('div')(({ theme }) => ({
+const SearchIconWrapper = styled("div")(({ theme }) => ({
   padding: theme.spacing(0, 2),
-  height: '100%',
-  position: 'absolute',
-  pointerEvents: 'none',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
+  height: "100%",
+  position: "absolute",
+  pointerEvents: "none",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: 'inherit',
-  '& .MuiInputBase-input': {
+  color: "inherit",
+  "& .MuiInputBase-input": {
     padding: theme.spacing(1, 1, 1, 0),
     // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('md')]: {
-      width: '20ch',
+    transition: theme.transitions.create("width"),
+    width: "100%",
+    [theme.breakpoints.up("md")]: {
+      width: "20ch",
     },
   },
 }));
@@ -110,19 +111,19 @@ export default function Header() {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
-  const menuId = 'primary-search-account-menu';
+  const menuId = "primary-search-account-menu";
   const renderMenu = (
     <Menu
       anchorEl={anchorEl}
       anchorOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
+        vertical: "top",
+        horizontal: "right",
       }}
       id={menuId}
       keepMounted
       transformOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
+        vertical: "top",
+        horizontal: "right",
       }}
       open={isMenuOpen}
       onClose={handleMenuClose}
@@ -132,139 +133,160 @@ export default function Header() {
     </Menu>
   );
 
-  const mobileMenuId = 'primary-search-account-menu-mobile';
-  const renderMobileMenu =  () =>{
-return <Menu
-      anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-      }}
-      id={mobileMenuId}
-      keepMounted
-      transformOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-      }}
-      open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
-      // sx={{bgcolor: '#f9fafb'}}
-    >
-      <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="error">
-            <MailIcon />
-          </Badge>
-        </IconButton>
-        <p>Messages</p>
-      </MenuItem>
-      <MenuItem>
-        <IconButton
-          size="large"
-          aria-label="show 17 new notifications"
-          color="inherit"
+  const mobileMenuId = "primary-search-account-menu-mobile";
+  const renderMobileMenu = () => {
+    return (
+      <Menu
+        anchorEl={mobileMoreAnchorEl}
+        anchorOrigin={{
+          vertical: "top",
+          horizontal: "right",
+        }}
+        id={mobileMenuId}
+        keepMounted
+        transformOrigin={{
+          vertical: "top",
+          horizontal: "right",
+        }}
+        open={isMobileMenuOpen}
+        onClose={handleMobileMenuClose}
+        // sx={{bgcolor: '#f9fafb'}}
+      >
+        <MenuItem>
+          <IconButton
+            size="large"
+            aria-label="show 4 new mails"
+            color="inherit"
+          >
+            <Badge badgeContent={4} color="error">
+              <MailIcon />
+            </Badge>
+          </IconButton>
+          <p>Messages</p>
+        </MenuItem>
+        <MenuItem>
+          <IconButton
+            size="large"
+            aria-label="show 17 new notifications"
+            color="inherit"
+          >
+            <Badge badgeContent={17} color="error">
+              <NotificationsIcon />
+            </Badge>
+          </IconButton>
+          <p>Notifications</p>
+        </MenuItem>
+        <MenuItem onClick={handleProfileMenuOpen}>
+          <IconButton
+            size="large"
+            aria-label="account of current user"
+            aria-controls="primary-search-account-menu"
+            aria-haspopup="true"
+            color="inherit"
+          >
+            <AccountCircle />
+          </IconButton>
+          <p>Profile</p>
+        </MenuItem>
+        <MenuItem
+          onClick={() => {
+            setIsDark(!isDark);
+            handleMobileMenuClose();
+          }}
         >
-          <Badge badgeContent={17} color="error">
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
-        <p>Notifications</p>
-      </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton
-          size="large"
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <AccountCircle />
-        </IconButton>
-        <p>Profile</p>
-      </MenuItem>
-      <MenuItem onClick={() => {
-        setIsDark(!isDark)
-        handleMobileMenuClose()
-      }}>
-        <IconButton
-                size="large"
-                disableTouchRipple
-                sx={{
-                  color: 'inherit',
-                  transition: 'background-color 0.15s ease',
-                }}
-              >
-                {isDark?<DarkModeOutlinedIcon />:<LightModeOutlinedIcon />}
-              </IconButton>
-        <p>{isDark?'Light': 'Dark'}</p>
-      </MenuItem>
-    </Menu>
-  }
-    
-  
+          <IconButton
+            size="large"
+            disableTouchRipple
+            sx={{
+              color: "inherit",
+              transition: "background-color 0.15s ease",
+            }}
+          >
+            {isDark ? <DarkModeOutlinedIcon /> : <LightModeOutlinedIcon />}
+          </IconButton>
+          <p>{isDark ? "Light" : "Dark"}</p>
+        </MenuItem>
+      </Menu>
+    );
+  };
 
   return (
-    <Box sx={{ flexGrow: 1, }}>
+    <Box sx={{ flexGrow: 1 }}>
       <AppBar
         position="fixed"
         elevation={0}
         sx={{
-          bgcolor: `${isDark ? '#2a2a40' : '#fafaf9'}`,
-          color: `${isDark ? '#e0e0e0' : '#2f2f2f'}`,
+          bgcolor: `${isDark ? "#2E2E48" : "#ffffff"}`,
+          color: `${isDark ? "#e0e0e0" : "#2f2f2f"}`,
         }}
       >
         <Toolbar>
+          <IconButton
+            disableRipple
+            disableFocusRipple
+            size="large"
+            edge="start"
+            aria-label="open drawer"
+            sx={{
+              color: isDark ? "white" : "primary.main",
+              transition: "background-color 0.15s ease",
+              pl: "4px",
+            }}
+          >
+            <StorefrontOutlinedIcon fontSize="26px" />
+            <Typography
+              noWrap
+              component="div"
+              sx={{
+                fontWeight: 700,
+                fontSize: 16,
+                color: isDark ? "white" : "primary.main",
+                display: { xs: "none", sm: "block" },
+                px: "6px",
+              }}
+            >
+              DUKAAN
+            </Typography>
+          </IconButton>
+
           {!isMediumScreen && (
             <IconButton
               onClick={() => {
                 setIsDrawerOpen(!isDrawerOpen);
               }}
-              size="large"
-              edge="start"
-              color="inherit"
-              aria-label="open drawer"
+              disableRipple
+              disableFocusRipple
               sx={{
-                color: 'inherit',
-                transition: 'background-color 0.15s ease',
-                '&:hover': {
-                  bgcolor: `${isDark ? 'rgba(255, 255, 255, 0.1)' : undefined}`,
-                },
-                mr: 2,
+                color: isDark ? "white" : "primary.main",
+                width: "21.5px",
+                height: "21.5px",
+                border: !isDark ? "1px solid #F3F3F3" : "",
+
+                borderRadius: "full",
+                bgcolor: isDark ? "#525270" : "white",
+                boxShadow: "0 0 3px rgba(0, 0, 0, 0.15)",
+                ml: "5px",
               }}
             >
-              <MenuIcon />
+              {isDrawerOpen ? (
+                <ChevronLeftRoundedIcon fontSize="small" />
+              ) : (
+                <ChevronRightRoundedIcon fontSize="small" />
+              )}
             </IconButton>
           )}
-
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ display: { xs: 'none', sm: 'block' } }}
-          >
-            MUI
-          </Typography>
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ 'aria-label': 'search' }}
-            />
-          </Search>
           <Box sx={{ flexGrow: 1 }} />
-          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+          <Box sx={{ display: { xs: "none", md: "flex" } }}>
             {isDark ? (
               <IconButton
                 size="large"
                 disableTouchRipple
                 onClick={() => setIsDark(false)}
                 sx={{
-                  color: 'inherit',
-                  transition: 'background-color 0.15s ease',
-                  '&:hover': {
-                    bgcolor: 'rgba(255, 255, 255, 0.1)',
+                  color: "inherit",
+                  transition: "background-color 0.15s ease",
+                  "&:hover": {
+                    bgcolor: "rgba(255, 255, 255, 0.1)",
                   },
                 }}
               >
@@ -274,7 +296,7 @@ return <Menu
               <IconButton
                 size="large"
                 disableTouchRipple
-                sx={{ color: 'black' }}
+                sx={{ color: "black" }}
                 onClick={() => {
                   setIsDark(true);
                 }}
@@ -286,10 +308,10 @@ return <Menu
               size="large"
               aria-label="show 4 new mails"
               sx={{
-                color: 'inherit',
-                transition: 'background-color 0.15s ease',
-                '&:hover': {
-                  bgcolor: `${isDark ? 'rgba(255, 255, 255, 0.1)' : undefined}`,
+                color: "inherit",
+                transition: "background-color 0.15s ease",
+                "&:hover": {
+                  bgcolor: `${isDark ? "rgba(255, 255, 255, 0.1)" : undefined}`,
                 },
               }}
             >
@@ -301,10 +323,10 @@ return <Menu
               size="large"
               aria-label="show 17 new notifications"
               sx={{
-                color: 'inherit',
-                transition: 'background-color 0.15s ease',
-                '&:hover': {
-                  bgcolor: `${isDark ? 'rgba(255, 255, 255, 0.1)' : undefined}`,
+                color: "inherit",
+                transition: "background-color 0.15s ease",
+                "&:hover": {
+                  bgcolor: `${isDark ? "rgba(255, 255, 255, 0.1)" : undefined}`,
                 },
               }}
             >
@@ -320,17 +342,17 @@ return <Menu
               aria-haspopup="true"
               onClick={handleProfileMenuOpen}
               sx={{
-                color: 'inherit',
-                transition: 'background-color 0.15s ease',
-                '&:hover': {
-                  bgcolor: `${isDark ? 'rgba(255, 255, 255, 0.1)' : undefined}`,
+                color: "inherit",
+                transition: "background-color 0.15s ease",
+                "&:hover": {
+                  bgcolor: `${isDark ? "rgba(255, 255, 255, 0.1)" : undefined}`,
                 },
               }}
             >
               <AccountCircle />
             </IconButton>
           </Box>
-          <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
+          <Box sx={{ display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
               aria-label="show more"

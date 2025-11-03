@@ -1,19 +1,32 @@
-import { Card, CardContent } from '@mui/material';
-import React, { useContext } from 'react';
-import { MyContext } from '../context/DrawerState';
+import { Card, CardContent } from "@mui/material";
+import React, { useContext } from "react";
+import { MyContext } from "../context/DrawerState";
 
-const CustomCard = ({ children, sx = {} }) => {
+const CustomCard = ({
+  children,
+  sx = {},
+  disableCardContent = false,
+  disableBgClr = false,
+}) => {
   const { isDark } = useContext(MyContext);
 
   return (
     <Card
+      elevation={0}
       sx={{
-        bgcolor: `${isDark ? '#373753ff' : '#fafaf9'}`,
-        color: `${isDark ? 'white' : undefined}`,
+        bgcolor: `${
+          disableBgClr
+            ? "transparent"
+            : isDark
+            ? "cardBgClr.main"
+            : "cardBgClr.light"
+        }`,
+        borderRadius: "5px",
+        color: `${isDark ? "white" : undefined}`,
         ...sx,
       }}
     >
-      <CardContent>{children}</CardContent>
+      {disableCardContent ? children : <CardContent>{children}</CardContent>}
     </Card>
   );
 };

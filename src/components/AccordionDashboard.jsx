@@ -3,10 +3,10 @@ import {
   AccordionDetails,
   AccordionSummary,
   Typography,
-} from '@mui/material';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { useContext } from 'react';
-import { MyContext } from '../context/DrawerState';
+} from "@mui/material";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { useContext } from "react";
+import { MyContext } from "../context/DrawerState";
 
 const AccordionDashboard = ({ children }) => {
   const { isDark } = useContext(MyContext);
@@ -15,16 +15,16 @@ const AccordionDashboard = ({ children }) => {
     <>
       <Accordion
         sx={{
-          bgcolor: `${isDark ? '#2c2c3e' : ''}`,
-          color: `${isDark ? '#fff' : ''}`,
-          border: '1px solid rgba(255,255,255,0.1)',
+          bgcolor: `${isDark ? "#2E2E48" : ""}`,
+          color: `${isDark ? "#fff" : ""}`,
+          border: "1px solid rgba(255,255,255,0.1)",
         }}
       >
         <AccordionSummary
           expandIcon={
             <ExpandMoreIcon
               sx={{
-                color: `${isDark ? '#fff' : ''}`,
+                color: `${isDark ? "#fff" : ""}`,
               }}
             />
           }

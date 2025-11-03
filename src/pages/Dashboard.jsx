@@ -1,5 +1,5 @@
 import { Grid, useTheme } from "@mui/material";
-import HighlightsCard from "../components/highlightsCard";
+import HighlightsCard from "../components/HighlightsCard";
 import TotalRevenueChart from "../components/TotalRevenueChart";
 import MostSoldItemsCard from "../components/MostSoldItemsCard";
 import LatestOrdersTable from "../components/DashboarTable";

@@ -21,7 +21,7 @@ const HighlightsCard = ({
       disableCardContent={true}
       disableBgClr={transparent}
       sx={{
-        padding: "20px 16px 22px",
+        padding: { sm: "20px 16px 22px", xs: "20px 12px 22px" },
         minHeight: { sm: "126px", xs: "120px" },
         color: "white",
         display: "flex",
@@ -39,7 +39,7 @@ const HighlightsCard = ({
         <Stack height="100%" direction="column" justifyContent="space-between">
           <HeadingText
             sx={{
-              fontSize: "14px",
+              fontSize: { sm: "14px", xs: "13px" },
               color: isDark ? "headingText.main" : "headingText.light",
             }}
           >
@@ -50,14 +50,19 @@ const HighlightsCard = ({
             variant="body2"
             sx={{
               fontWeight: 500,
-              fontSize: "14px",
+              fontSize: { sm: "14px", xs: "13px" },
               color: isDark ? "descriptionText.main" : "descriptionText.light",
             }}
           >
             {description}
           </Typography>
         </Stack>
-        <Box sx={{ width: "70px", height: "70px" }}>
+        <Box
+          sx={{
+            width: { sm: "70px", xs: "62px" },
+            height: { sm: "70px", xs: "62px" },
+          }}
+        >
           <DonutChart clr={donutClr} />
         </Box>
       </Stack>

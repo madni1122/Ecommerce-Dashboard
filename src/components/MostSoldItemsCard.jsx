@@ -26,11 +26,14 @@ const MostSoldItemsCard = () => {
       <HeadingText
         sx={{
           color: isDark ? "headingText.main" : "strongText.light",
-          fontSize: "18px",
+          fontSize: { xs: "17px !important", sm: "18px !important" },
+          lineHeight: 1.3,
+          fontWeight: 600,
         }}
       >
         Most Sold Items
       </HeadingText>
+
       <Box sx={{ mt: "2px" }}>
         {progressData.map(({ label, value }) => (
           <LinearProgressGraph key={label} progressVal={value} label={label} />

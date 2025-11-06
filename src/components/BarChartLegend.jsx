@@ -11,12 +11,12 @@ const BarChartLegend = ({ label, IconClr }) => {
       <CircleIcon
         sx={{
           color: `${IconClr}`,
-          fontSize: "11.5px",
+          fontSize: { sm: "11.5px", xs: "10.5px" },
         }}
       />
       <Typography
         sx={{
-          fontSize: 12,
+          fontSize: { sm: 12, xs: 11 },
           color: isDark ? "descriptionText.main" : "descriptionText.light",
           fontWeight: "medium",
         }}

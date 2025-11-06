@@ -12,10 +12,12 @@ import HeadingText from "./HeadingText";
 import { MyContext } from "../context/DrawerState";
 import CircleIcon from "@mui/icons-material/Circle";
 
-import { Stack, Typography, useTheme } from "@mui/material";
+import { Stack, Typography, useMediaQuery, useTheme } from "@mui/material";
+import ResponsiveTableCards from "../products/TstingCompnt";
+import { getCircleClr } from "../utils/getCircleClr";
 
-function createData(product, orderId, date, customerName, status, amount) {
-  return { product, orderId, date, customerName, status, amount };
+function createData(name, id, date, customerName, status, price) {
+  return { name, id, date, customerName, status, price };
 }
 
 const rows = [
@@ -66,6 +68,7 @@ const tableHeaders = [
 ];
 
 export default function LatestOrdersTable() {
+  const isSmallScreen = useMediaQuery("(max-width:845px)");
   const { isDark } = React.useContext(MyContext);
   const theme = useTheme();
   const getStyles = () => ({
@@ -77,12 +80,7 @@ export default function LatestOrdersTable() {
 
     borderBottom: "none",
   });
-  const getCircleClr = (status) =>
-    status === "Delivered"
-      ? theme.palette.secondary.main
-      : status === "Pending"
-      ? theme.palette.orange.main
-      : theme.palette.warnClr.main;
+
   return (
     <CustomCard
       disableCardContent={true}
@@ -97,109 +95,111 @@ export default function LatestOrdersTable() {
       >
         Latest Orders
       </HeadingText>
-      <TableContainer
-        component={Paper}
-        sx={{
-          width: "100%",
-          maxWidth: "100%", // ✅ Ensure it doesn't exceed container
-          overflowX: "auto",
-          mt: "13px",
-          borderRadius: "6px",
-          boxShadow: "none",
-          bgcolor: isDark ? "cardBgClr.main" : "cardBgClr.light",
-          border: `1px solid ${
-            isDark
-              ? theme.palette.tableStroke.main
-              : theme.palette.tableStroke.light
-          }`,
-          // Responsive min-width
-          minWidth: { xs: 300, sm: 600 }, // Adjust as needed
-        }}
-        elevation={0}
-      >
-        <Table
+      {isSmallScreen ? (
+        <ResponsiveTableCards rowsData={rows} />
+      ) : (
+        <TableContainer
+          component={Paper}
           sx={{
-            minWidth: 750, // Table needs minimum width
-            whiteSpace: "nowrap",
-            borderCollapse: "separate",
-            width: "100%",
+            width: { md: "100%" },
+            maxWidth: "100%", // ✅ takes full card width always
+            overflowX: "auto",
+            mt: "13px",
+            borderRadius: "6px",
+            boxShadow: "none",
+            bgcolor: isDark ? "cardBgClr.main" : "cardBgClr.light",
+            border: `1px solid ${
+              isDark
+                ? theme.palette.tableStroke.main
+                : theme.palette.tableStroke.light
+            }`,
           }}
-          aria-label="simple table"
+          elevation={0}
         >
-          <TableHead>
-            <TableRow
-              sx={{
-                bgcolor: isDark ? "tableHeaderBg.main" : "tableHeaderBg.light",
-              }}
-            >
-              {tableHeaders.map((header, index) => (
-                <TableCell
-                  key={index}
-                  align={header.label !== "Action" ? "left" : "center"}
-                  sx={{
-                    color: isDark ? "headingText.main" : "strongText.light",
-                    fontWeight: 400,
-                    fontSize: { md: "14.8px", lg: "16px" },
-                    "&.MuiTableCell-root": {
-                      padding: { xs: "10px", lg: "10px 24px" },
-                    },
-                    border: 0,
-                  }}
-                >
-                  {header.label}
-                </TableCell>
-              ))}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows.map((row) => (
+          <Table
+            sx={{
+              whiteSpace: "nowrap",
+              borderCollapse: "separate",
+            }}
+            aria-label="simple table"
+          >
+            <TableHead>
               <TableRow
-                key={row.product}
                 sx={{
-                  "&:last-child td, &:last-child th": { border: 0 },
-                  bgcolor: isDark ? "cardBgClr.main" : "cardBgClr.light",
+                  bgcolor: isDark
+                    ? "tableHeaderBg.main"
+                    : "tableHeaderBg.light",
                 }}
               >
-                <TableCell
-                  align="left"
-                  component="th"
-                  sx={{ ...getStyles(), fontWeight: 500 }}
-                >
-                  {row.product}
-                </TableCell>
-                <TableCell sx={{ ...getStyles() }} align="left">
-                  #{row.orderId}
-                </TableCell>
-                <TableCell align="left" sx={{ ...getStyles() }}>
-                  {row.date}
-                </TableCell>
-                <TableCell align="left" sx={{ ...getStyles() }}>
-                  {row.customerName}
-                </TableCell>
-                <TableCell align="left" sx={{ ...getStyles() }}>
-                  <Stack direction="row" spacing="5px" alignItems="center">
-                    <CircleIcon
-                      sx={{
-                        color: getCircleClr(row.status),
-                        fontSize: "9.5px",
-                      }}
-                    />
-                    <Typography sx={{ fontSize: "inherit" }}>
-                      {row.status}
-                    </Typography>
-                  </Stack>
-                </TableCell>
-                <TableCell align="left" sx={{ ...getStyles() }}>
-                  ${row.amount.toFixed(2)}
-                </TableCell>
-                <TableCell align="center" sx={{ ...getStyles() }}>
-                  <MoreHorizIcon />
-                </TableCell>
+                {tableHeaders.map((header, index) => (
+                  <TableCell
+                    key={index}
+                    align={header.label !== "Action" ? "left" : "center"}
+                    sx={{
+                      color: isDark ? "headingText.main" : "strongText.light",
+                      fontWeight: 400,
+                      fontSize: { md: "14.8px", lg: "16px" },
+                      "&.MuiTableCell-root": {
+                        padding: { xs: "10px", lg: "10px 24px" },
+                      },
+                      border: 0,
+                    }}
+                  >
+                    {header.label}
+                  </TableCell>
+                ))}
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+            </TableHead>
+            <TableBody>
+              {rows.map((row) => (
+                <TableRow
+                  key={row.name}
+                  sx={{
+                    "&:last-child td, &:last-child th": { border: 0 },
+                    bgcolor: isDark ? "cardBgClr.main" : "cardBgClr.light",
+                  }}
+                >
+                  <TableCell
+                    align="left"
+                    component="th"
+                    sx={{ ...getStyles(), fontWeight: 500 }}
+                  >
+                    {row.name}
+                  </TableCell>
+                  <TableCell sx={{ ...getStyles() }} align="left">
+                    #{row.id}
+                  </TableCell>
+                  <TableCell align="left" sx={{ ...getStyles() }}>
+                    {row.date}
+                  </TableCell>
+                  <TableCell align="left" sx={{ ...getStyles() }}>
+                    {row.customerName}
+                  </TableCell>
+                  <TableCell align="left" sx={{ ...getStyles() }}>
+                    <Stack direction="row" spacing="5px" alignItems="center">
+                      <CircleIcon
+                        sx={{
+                          color: getCircleClr(row.status, theme),
+                          fontSize: "9.5px",
+                        }}
+                      />
+                      <Typography sx={{ fontSize: "inherit" }}>
+                        {row.status}
+                      </Typography>
+                    </Stack>
+                  </TableCell>
+                  <TableCell align="left" sx={{ ...getStyles() }}>
+                    ${row.price.toFixed(2)}
+                  </TableCell>
+                  <TableCell align="center" sx={{ ...getStyles() }}>
+                    <MoreHorizIcon />
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      )}
     </CustomCard>
   );
 }

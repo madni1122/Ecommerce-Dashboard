@@ -17,19 +17,23 @@ const TotalRevenueChart = () => {
       disableCardContent={true}
       sx={{
         maxHeight: "321px",
-        padding: "12px 19px 0px 16px",
+        padding: { sm: "12px 19px 0px 16px", xs: "12px 15px 0px 16px" },
         position: "relative",
       }}
     >
-      <Stack direction="row" justifyContent="space-between">
+      <Stack
+        direction={{ sm: "row", xs: "column" }}
+        justifyContent="space-between"
+      >
         <HeadingText
           sx={{
             color: isDark ? "headingText.main" : "strongText.light",
+            fontSize: { xs: "16px !important", sm: "17px !important" },
           }}
         >
           Total Revenue
         </HeadingText>
-        <Stack direction="row" spacing="20px">
+        <Stack direction="row" spacing={{ sm: "20px", xs: "10px" }}>
           <BarChartLegend label="Profit" IconClr={theme.palette.primary.main} />
           <BarChartLegend
             label="Loss"
@@ -37,23 +41,40 @@ const TotalRevenueChart = () => {
           />
         </Stack>
       </Stack>
-      <Stack direction="row" spacing="18px" sx={{ mt: "12px" }}>
+      <Stack
+        direction={{ xs: "column", sm: "row" }}
+        spacing={{ xs: 1, sm: "18px" }}
+        sx={{ mt: "12px" }}
+      >
         <StrongCountUp countVal="50.4" />
+
         <Stack
           direction="row"
           alignItems="center"
           sx={{
             color: "secondary.main",
+            width: { xs: "100%", sm: "auto" },
           }}
         >
-          <ArrowUpwardRoundedIcon fontSize="medium" />
+          <ArrowUpwardRoundedIcon
+            fontSize="small"
+            sx={{ fontSize: { xs: "18px", sm: "20px" } }}
+          />
+
           <Typography
-            sx={{ fontSize: "12.5px", fontWeight: "medium", mt: "5.5px" }}
+            sx={{
+              fontSize: { xs: "11.5px", sm: "12.5px" },
+              fontWeight: 500,
+              ml: "4px",
+              mt: { xs: 0, sm: "5.6px" },
+              whiteSpace: "nowrap",
+            }}
           >
-            5% than last month
+            5% less than last month
           </Typography>
         </Stack>
       </Stack>
+
       <Box sx={{ mt: "36px" }}>
         <SimpleBarChart />
       </Box>

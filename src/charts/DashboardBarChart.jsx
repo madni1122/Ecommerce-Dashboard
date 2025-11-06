@@ -1,4 +1,4 @@
-import { useTheme } from "@mui/material";
+import { useMediaQuery, useTheme } from "@mui/material";
 import {
   BarChart,
   Bar,
@@ -71,10 +71,13 @@ const data = [
   },
 ];
 
+const smallScreenData = data.filter((val, idx) => idx % 2 === 0);
+
 // #endregion
 const SimpleBarChart = () => {
   const { isDark } = useContext(MyContext);
   const theme = useTheme();
+  const isSmallScreen = useMediaQuery("(max-width:599px)");
   const primaryClr = theme.palette.primary;
   const LabelClr = theme.palette.barChartLabel.main;
   const descriptionTextClr = theme.palette.descriptionText;
@@ -101,7 +104,7 @@ const SimpleBarChart = () => {
         position: "static",
       }}
       responsive
-      data={data}
+      data={isSmallScreen ? smallScreenData : data}
       margin={{
         top: 5,
         right: 0,

@@ -5,6 +5,7 @@ const HeadingText = ({ sx = {}, children }) => {
     <Typography
       sx={{
         fontWeight: "bold",
+        fontSize: { sm: 18, xs: 17 },
         ...sx,
       }}
     >

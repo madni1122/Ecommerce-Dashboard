@@ -6,7 +6,10 @@ const theme = createTheme({
     fontFamily: fonts.lato,
     strongCountUp: {
       fontWeight: 700,
-      fontSize: "24px",
+      fontSize: "22px",
+      "@media (min-width: 600px)": {
+        fontSize: "24px",
+      },
     },
   },
   palette: {

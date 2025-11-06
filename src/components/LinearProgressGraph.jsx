@@ -15,18 +15,35 @@ function LinearProgressWithLabel(props) {
         justifyContent="space-between"
         sx={{
           color: isDark ? "headingText.main" : "strongText.light",
-          fontSize: "14px",
         }}
       >
-        <Box sx={{ minWidth: 35 }}>
-          <Typography variant="body2" sx={{ fontWeight: 600 }}>
+        <Box
+          sx={{
+            minWidth: 35,
+          }}
+        >
+          <Typography
+            variant="body2"
+            sx={{
+              fontSize: { xs: "13.5px !important", sm: "14px !important" },
+              fontWeight: 600,
+            }}
+          >
             {props.label}
           </Typography>
         </Box>
-        <Box sx={{ minWidth: 35 }}>
-          <Typography variant="body2" sx={{ fontWeight: 700 }}>{`${Math.round(
-            props.value
-          )}%`}</Typography>
+        <Box
+          sx={{
+            minWidth: 35,
+          }}
+        >
+          <Typography
+            variant="body2"
+            sx={{
+              fontWeight: 700,
+              fontSize: { xs: "13.5px !important", sm: "14px !important" },
+            }}
+          >{`${Math.round(props.value)}%`}</Typography>
         </Box>
       </Stack>
       <Box>
